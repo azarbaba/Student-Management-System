@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #0f172a;
+            margin-bottom: 25px;
+        }
+
+        form {
+            background: white;
+            width: 550px;
+            max-width: 95%;
+            padding: 30px 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px #0001;
+        }
+
+        label {
+            display: block;
+            font-size: 17px;
+            font-weight: bold;
+            color: #1e293b;
+            margin: 12px 0 8px;
+        }
+
+        input, select {
+            width: 100%;
+            height: 46px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 7px;
+            outline: none;
+            margin-bottom: 8px;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            padding: 12px;
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            background: #1e293b;
+        }
+
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 25px;
+            }
+
+            form {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Update Student {{ std[0] }}</h2>
+
+    <form action="/students/edit/{{ std[0] }}" method="POST">
+
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ std[1] }}" placeholder="Enter student name">
+
+        <label>Age:</label>
+        <input type="text" name="age" value="{{ std[2] }}" placeholder="Enter age">
+
+        <label>Gender:</label>
+        <input type="text" name="gender" value="{{ std[3] }}" placeholder="Enter gender">
+
+        <label>Marks:</label>
+        <input type="text" name="marks" value="{{ std[4] }}" placeholder="Enter marks">
+
+        <label>Course:</label>
+        <input type="text" name="course" value="{{ std[5] }}" placeholder="Enter course">
+
+        <label>Image:</label>
+        <input type="text" name="image" value="{{ std[6] }}" placeholder="Enter image URL">
+
+        <label>Attendance:</label>
+        <select name="status">
+            <option value="1" {% if std[7] == 1 %}selected{% endif %}>Present</option>
+            <option value="0" {% if std[7] == 0 %}selected{% endif %}>Absent</option>
+        </select>
+
+        <button type="submit">Update Student</button>
+
+        <a href="/" class="back-home">Back to Home</a>
+
+    </form>
+
+</body>
+</html>
+
+

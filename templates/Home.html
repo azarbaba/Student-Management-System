@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub | Dashboard</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f1f5f9; color: #1e293b; }
+
+        /* Navbar */
+        .navbar { background: #0f172a; color: white; padding: 20px 7%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .navbar span { color: #60a5fa; }
+
+        .add-btn, .view-btn, .update-btn {
+            background: #2563eb;
+            color: white;
+            padding: 13px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .add-btn:hover, .view-btn:hover, .update-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Dashboard */
+        .container { width: 88%; max-width: 1400px; margin: 45px auto; }
+        .heading { margin-bottom: 35px; }
+        .heading h1 { font-size: 32px; margin-bottom: 10px; }
+        .heading p, footer { color: #64748b; }
+
+        /* Student Cards */
+        .student-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+        .student-card { background: white; padding: 22px; border: 1px solid #e2e8f0; border-radius: 16px; text-align: center; box-shadow: 0 4px 18px #0001; display: flex; flex-direction: column; transition: 0.3s; }
+        .student-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px #0002; }
+
+        /* Student Image */
+        .image-container { width: 100%; height: 280px; background: #e2e8f0; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+        .student-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .student-card h3 { font-size: 21px; margin-bottom: 15px; }
+
+        /* Student Details */
+        .student-info { text-align: left; border-top: 1px solid #e2e8f0; padding-top: 15px; flex-grow: 1; }
+        .student-info p { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 13px 0; font-size: 14px; color: #64748b; }
+        .student-info strong { color: #334155; }
+        .student-info span { color: #0f172a; font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+
+        /* Attendance Badge */
+        .status {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .present { background: #dcfce7; color: #15803d !important; }
+        .absent { background: #fee2e2; color: #b91c1c !important; }
+
+        /* Buttons */
+        .card-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .card-buttons form { width: 100%; }
+
+        .view-btn, .update-btn, .delete-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .update-btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+        }
+
+        .update-btn:hover { background: #1d4ed8; }
+
+        .delete-btn { background: #dc2626; color: white; border: 0; cursor: pointer; }
+        .delete-btn:hover { background: #b91c1c; }
+
+        /* Empty Message */
+        .empty-message { grid-column: 1 / -1; background: white; padding: 45px 20px; border-radius: 14px; text-align: center; }
+        .empty-message h3 { margin-bottom: 10px; }
+        .empty-message p { color: #64748b; }
+
+        /* Footer */
+        footer { text-align: center; padding: 25px; font-size: 14px; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container { width: 92%; }
+            .student-container { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        }
+
+        @media (max-width: 600px) {
+            .navbar { padding: 18px 5%; }
+            .container { width: 90%; margin: 30px auto; }
+            .heading h1 { font-size: 26px; }
+            .student-container { grid-template-columns: 1fr; gap: 22px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Student<span>Hub</span></h2>
+        <a href="/students/add" class="add-btn">+ Add Student</a>
+    </nav>
+
+    <!-- Dashboard -->
+    <main class="container">
+
+        <div class="heading">
+            <h1>Student Dashboard</h1>
+            <p>Manage and view all student information in one place.</p>
+        </div>
+
+        <div class="student-container">
+
+            {% for std in stds %}
+            <div class="student-card">
+
+                <div class="image-container">
+                    <img src="{{ std[6] }}" alt="Photo of {{ std[1] }}" class="student-image">
+                </div>
+
+                <h3>{{ std[1] }}</h3>
+
+                <div class="student-info">
+                    <p><strong>Age</strong><span>{{ std[2] }}</span></p>
+                    <p><strong>Gender</strong><span>{{ std[3] }}</span></p>
+                    <p><strong>Marks</strong><span>{{ std[4] }}</span></p>
+                    <p><strong>Course</strong><span>{{ std[5] }}</span></p>
+
+                    <!-- Attendance Status -->
+                    <p>
+                        <strong>Status</strong>
+                        {% if std[7] == 1 %}
+                            <span class="status present">Present</span>
+                        {% else %}
+                            <span class="status absent">Absent</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="card-buttons">
+                    <a href="/students/{{ std[0] }}" class="view-btn">View Profile</a>
+
+                    <a href="/students/edit/{{ std[0] }}" class="update-btn">Update</a>
+
+                    <form action="/std/delete/{{ std[0] }}" method="POST">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                </div>
+
+            </div>
+
+            {% else %}
+            <div class="empty-message">
+                <h3>No Students Found</h3>
+                <p>Add a student to display student information here.</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>StudentHub | Student Management System</p>
+    </footer>
+
+</body>
+</html>
+
+
+

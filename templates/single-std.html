@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #172554;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar h2 {
+            font-size: 24px;
+        }
+
+        .navbar span {
+            color: #60a5fa;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: #3b82f6;
+        }
+
+        /* Main Section */
+        .main {
+            padding: 40px 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            color: #172554;
+            font-size: 30px;
+        }
+
+        .heading p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        /* Profile Card */
+        .card {
+            max-width: 430px;
+            width: 100%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        /* Profile Image */
+        .image-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-box img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #dbeafe;
+            box-shadow: 0 5px 15px rgba(37,99,235,0.15);
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #172554;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        /* Student Information */
+        .details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        .details p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 5px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
+            gap: 10px;
+        }
+
+        .details strong {
+            color: #475569;
+        }
+
+        .details span {
+            color: #1e293b;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Attendance */
+        .attendance {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 9px;
+            margin-top: 22px;
+        }
+
+        .attendance strong {
+            color: #334155;
+        }
+
+        .present {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .absent {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Home Button */
+        .back-btn {
+            display: block;
+            text-align: center;
+            background: #172554;
+            color: white;
+            text-decoration: none;
+            padding: 13px;
+            margin-top: 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        /* Mobile Responsive */
+        @media(max-width: 500px) {
+            .navbar {
+                padding: 18px 5%;
+            }
+
+            .navbar h2 {
+                font-size: 19px;
+            }
+
+            .main {
+                padding: 30px 15px;
+            }
+
+            .heading h1 {
+                font-size: 24px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .details p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>Student<span>Hub</span></h2>
+        <a href="/">Home</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="heading">
+            <h1>Student Profile</h1>
+            <p>Complete student information and attendance details</p>
+        </div>
+
+        <!-- Student Profile Card -->
+        <div class="card">
+
+            <div class="image-box">
+                <img src="{{ std[6] }}" alt="Student Image">
+            </div>
+
+            <h2>{{ std[1] }}</h2>
+
+            <div class="details">
+
+                <p>
+                    <strong>Student ID</strong>
+                    <span>{{ std[0] }}</span>
+                </p>
+
+                <p>
+                    <strong>Name</strong>
+                    <span>{{ std[1] }}</span>
+                </p>
+
+                <p>
+                    <strong>Age</strong>
+                    <span>{{ std[2] }}</span>
+                </p>
+
+                <p>
+                    <strong>Gender</strong>
+                    <span>{{ std[3] }}</span>
+                </p>
+
+                <p>
+                    <strong>Marks</strong>
+                    <span>{{ std[4] }}</span>
+                </p>
+
+                <p>
+                    <strong>Course</strong>
+                    <span>{{ std[5] }}</span>
+                </p>
+
+            </div>
+
+            <div class="attendance">
+
+                <strong>Attendance Status</strong>
+
+                {% if std[7] %}
+                    <span class="present">Present</span>
+                {% else %}
+                    <span class="absent">Absent</span>
+                {% endif %}
+
+            </div>
+
+            <a href="/" class="back-btn">← Back to Students</a>
+
+        </div>
+
+    </div>
+
+    <footer>
+        StudentHub | Student Management System
+    </footer>
+
+</body>
+</html>
